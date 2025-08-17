@@ -8,13 +8,11 @@
 # chart.py
 # Author: 23f2005559@ds.study.iitm.ac.in
 
-# chart.py
-# Author: 23f2005559@ds.study.iitm.ac.in
-
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from PIL import Image
 
 # Set professional style
 sns.set_style("whitegrid")
@@ -38,17 +36,19 @@ for segment in segments:
 df = pd.DataFrame(data, columns=["Month", "Segment", "Revenue"])
 
 # Plot lineplot
-plt.figure(figsize=(8, 8))  # (8 inches * 64 dpi = 512 pixels)
+plt.figure(figsize=(8, 8))  # 8 inches * 64 dpi = 512 px
 sns.lineplot(data=df, x="Month", y="Revenue", hue="Segment", palette="deep", linewidth=2.5)
 
-# Titles and labels
 plt.title("Monthly Revenue Trends by Customer Segment", fontsize=16, weight="bold")
 plt.xlabel("Month", fontsize=12)
 plt.ylabel("Revenue (USD)", fontsize=12)
-
-# Rotate x-axis labels for readability
 plt.xticks(rotation=45)
 
-# Save chart with exact dimensions
-plt.savefig("chart.png", dpi=64)  # no bbox_inches
+# Save chart
+plt.savefig("chart_raw.png", dpi=64)  # save raw first
 plt.close()
+
+# Force final PNG to be exactly 512x512
+img = Image.open("chart_raw.png")
+img = img.resize((512, 512), Image.LANCZOS)
+img.save("chart.png")
