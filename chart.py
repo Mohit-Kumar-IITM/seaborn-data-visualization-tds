@@ -8,6 +8,9 @@
 # chart.py
 # Author: 23f2005559@ds.study.iitm.ac.in
 
+# chart.py
+# Author: 23f2005559@ds.study.iitm.ac.in
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -35,7 +38,7 @@ for segment in segments:
 df = pd.DataFrame(data, columns=["Month", "Segment", "Revenue"])
 
 # Plot lineplot
-plt.figure(figsize=(8, 8))  # ensures 512x512 pixels with dpi=64
+plt.figure(figsize=(8, 8))  # (8 inches * 64 dpi = 512 pixels)
 sns.lineplot(data=df, x="Month", y="Revenue", hue="Segment", palette="deep", linewidth=2.5)
 
 # Titles and labels
@@ -47,5 +50,5 @@ plt.ylabel("Revenue (USD)", fontsize=12)
 plt.xticks(rotation=45)
 
 # Save chart with exact dimensions
-plt.savefig("chart.png", dpi=64, bbox_inches="tight")
+plt.savefig("chart.png", dpi=64)  # no bbox_inches
 plt.close()
